@@ -13,7 +13,7 @@
 	<string name="status_task_todo">A Fazer</string>
 	<string name="status_task_doing">Fazendo</string>
 	<string name="status_task_done">Feitas</string>
-	<string name="app_creator">Rafael Cabral Lopes</string>
+	<string name="app_creator">Rafael Cabral Lopes &amp; Luiz Felipe Silva de Freitas</string>
 	<!-- TODO: Remove or change this placeholder text -->
 	<string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
