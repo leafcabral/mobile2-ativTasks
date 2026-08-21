@@ -4,7 +4,9 @@
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
-	tools:context=".ui.auth.LoginFragment">
+	tools:context=".ui.auth.LoginFragment"
+	android:clipChildren="false"
+	android:clipToPadding="false">
 
 	<LinearLayout
 		android:id="@+id/main"
@@ -16,7 +18,9 @@
 		app:layout_constraintTop_toTopOf="parent"
 		app:layout_constraintBottom_toBottomOf="parent"
 		android:layout_marginHorizontal="16dp"
-		app:flow_verticalGap="20dp">
+		app:flow_verticalGap="20dp"
+		android:clipChildren="false"
+		android:clipToPadding="false">
 
 		<TextView
 			android:layout_width="wrap_content"
@@ -58,7 +62,7 @@
 			android:text="@string/input_login"
 			android:textColor="@color/white"
 			android:background="@drawable/bt_btn"
-			app:backgroundTint="@color/primary"
+			app:backgroundTint="@null"
 			android:layout_marginTop="24dp"/>
 
 		<LinearLayout

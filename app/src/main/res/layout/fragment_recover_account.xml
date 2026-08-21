@@ -5,14 +5,18 @@
 	android:layout_height="match_parent"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	tools:context=".ui.auth.RecoverAccountFragment"
-	android:fillViewport="true">
+	android:fillViewport="true"
+	android:clipChildren="false"
+	android:clipToPadding="false">
 
 	<LinearLayout
 		android:id="@+id/main"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:orientation="vertical"
-		android:layout_marginHorizontal="16dp">
+		android:layout_marginHorizontal="16dp"
+		android:clipChildren="false"
+		android:clipToPadding="false">
 
 		<com.google.android.material.appbar.MaterialToolbar
 			android:layout_width="match_parent"
@@ -35,7 +39,9 @@
 		<LinearLayout
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:orientation="vertical">
+			android:orientation="vertical"
+			android:clipChildren="false"
+			android:clipToPadding="false">
 
 			<TextView
 				android:layout_width="match_parent"
@@ -66,7 +72,7 @@
 				android:text="@string/input_login"
 				android:textColor="@color/white"
 				android:background="@drawable/bt_btn"
-				app:backgroundTint="@color/primary"
+				app:backgroundTint="@null"
 				android:layout_marginTop="24dp"/>
 
 			<ProgressBar
