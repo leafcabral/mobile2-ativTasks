@@ -5,8 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.leafcabral.tasks.R
 import com.leafcabral.tasks.databinding.FragmentRecoverAccountBinding
+import com.leafcabral.tasks.util.initToolbar
 
 class RecoverAccountFragment : Fragment() {
 
@@ -21,8 +23,31 @@ class RecoverAccountFragment : Fragment() {
 		return binding.root
 	}
 
+	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+		super.onViewCreated(view, savedInstanceState)
+		initToolbar(binding.toolbar)
+
+		binding.buttonRecover.setOnClickListener {
+			if (areInputsValid()) {
+				Toast.makeText(requireContext(), "Compila OK", Toast.LENGTH_SHORT).show()
+			}
+		}
+	}
+
 	override fun onDestroyView() {
 		super.onDestroyView()
 		_binding = null
+	}
+
+
+	private fun areInputsValid(): Boolean {
+		val email = binding.inputEmail.text.toString().trim()
+
+		if (email.isBlank()) {
+			Toast.makeText(requireContext(), "Preencha seu email", Toast.LENGTH_SHORT).show()
+			return false
+		}
+
+		return true
 	}
 }

@@ -30,6 +30,7 @@
 			android:textColor="@color/primary"/>
 
 		<EditText
+			android:id="@+id/input_email"
 			android:layout_width="match_parent"
 			android:layout_height="48dp"
 			android:hint="@string/input_email_placeholder"
@@ -47,6 +48,7 @@
 			android:layout_marginTop="16dp"/>
 
 		<EditText
+			android:id="@+id/input_senha"
 			android:layout_width="match_parent"
 			android:layout_height="48dp"
 			android:hint="@string/input_senha_placeholder"
@@ -56,7 +58,7 @@
 			android:layout_marginTop="4dp"/>
 
 		<com.google.android.material.button.MaterialButton
-			android:id="@+id/buttonLogin"
+			android:id="@+id/button_login"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:text="@string/input_login"
@@ -82,7 +84,7 @@
 				android:textColor="@color/primary"/>
 
 			<TextView
-				android:id="@+id/buttonRecover"
+				android:id="@+id/button_recover"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:text="@string/input_conta_recuperar"

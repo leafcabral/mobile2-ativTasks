@@ -19,6 +19,7 @@
 		android:clipToPadding="false">
 
 		<com.google.android.material.appbar.MaterialToolbar
+			android:id="@+id/toolbar"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			app:navigationIcon="@drawable/ic_back"
@@ -58,6 +59,7 @@
 				android:textColor="@color/primary"/>
 
 			<EditText
+				android:id="@+id/input_email"
 				android:layout_width="match_parent"
 				android:layout_height="48dp"
 				android:hint="@string/input_email_placeholder"
@@ -67,9 +69,10 @@
 				android:layout_marginTop="4dp"/>
 
 			<com.google.android.material.button.MaterialButton
+				android:id="@id/button_recover"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:text="@string/input_login"
+				android:text="@string/input_conta_recuperar"
 				android:textColor="@color/white"
 				android:background="@drawable/bt_btn"
 				app:backgroundTint="@null"
