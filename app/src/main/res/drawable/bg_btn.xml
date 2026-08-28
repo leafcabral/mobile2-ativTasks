@@ -7,7 +7,7 @@
 		android:right="-5dp"
 		android:bottom="-5dp">
 
-		<shape android:shape="rectangle">
+		<shape android:shape="rectangle" android:tintMode="multiply">
 			<solid android:color="@color/black"/>
 			<corners android:radius="8dp"/>
 		</shape>

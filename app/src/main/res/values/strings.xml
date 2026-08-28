@@ -42,4 +42,8 @@
 	<string name="register__password_empty">Preencha a senha</string>
 	<string name="recover_email_empty">Preencha seu email</string>
 	<string name="form_description_empty">Preencha uma descrição</string>
+	<string name="item_task_description">Criar layout da tela de login do app</string>
+	<string name="item_task_remove">Remover</string>
+	<string name="item_task_edit">Editar</string>
+	<string name="item_task_details">Detalhes</string>
 </resources>
