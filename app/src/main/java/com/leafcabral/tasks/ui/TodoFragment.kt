@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.leafcabral.tasks.R
-import com.leafcabral.tasks.databinding.FragmentDoingBinding
 import com.leafcabral.tasks.databinding.FragmentTodoBinding
 
 

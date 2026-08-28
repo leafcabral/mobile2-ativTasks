@@ -54,8 +54,7 @@
 				android:layout_height="48dp"
 				android:hint="@string/input_email_placeholder"
 				android:inputType="textEmailAddress"
-				android:background="@drawable/bg_edit_text"
-				android:padding="10dp"
+				style="@style/EditTextTheme"
 				android:layout_marginTop="4dp"/>
 
 			<TextView
@@ -72,8 +71,7 @@
 				android:layout_height="48dp"
 				android:hint="@string/input_senha_placeholder"
 				android:inputType="textPassword"
-				android:background="@drawable/bg_edit_text"
-				android:padding="10dp"
+				style="@style/EditTextTheme"
 				android:layout_marginTop="4dp"/>
 
 			<com.google.android.material.button.MaterialButton
@@ -81,9 +79,7 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:text="@string/input_login"
-				android:textColor="@color/white"
-				android:background="@drawable/bt_btn"
-				app:backgroundTint="@null"
+				style="@style/ButtonTheme"
 				android:layout_marginTop="24dp"/>
 
 			<ProgressBar

@@ -5,9 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.leafcabral.tasks.R
 import com.leafcabral.tasks.databinding.FragmentDoingBinding
-import com.leafcabral.tasks.databinding.FragmentLoginBinding
 
 
 class DoingFragment : Fragment() {

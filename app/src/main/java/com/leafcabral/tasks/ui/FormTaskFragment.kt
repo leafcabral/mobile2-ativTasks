@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.leafcabral.tasks.R
 import com.leafcabral.tasks.databinding.FragmentFormTaskBinding
-import com.leafcabral.tasks.databinding.FragmentRecoverAccountBinding
 import com.leafcabral.tasks.util.initToolbar
+import com.leafcabral.tasks.util.showBottomSheet
 
 
 class FormTaskFragment : Fragment() {
@@ -20,7 +20,7 @@ class FormTaskFragment : Fragment() {
 	override fun onCreateView(
 		inflater: LayoutInflater, container: ViewGroup?,
 		savedInstanceState: Bundle?
-	): View? {
+	): View {
 		_binding = FragmentFormTaskBinding.inflate(inflater, container, false)
 		return binding.root
 	}
@@ -46,7 +46,7 @@ class FormTaskFragment : Fragment() {
 		val description = binding.inputDescricao.text.toString().trim()
 
 		if (description.isBlank()) {
-			Toast.makeText(requireContext(), "Preencha uma descrição", Toast.LENGTH_SHORT).show()
+			showBottomSheet(message = getString(R.string.form_description_empty))
 			return false
 		}
 

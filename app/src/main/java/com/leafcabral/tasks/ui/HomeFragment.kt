@@ -6,10 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.leafcabral.tasks.R
-import com.leafcabral.tasks.databinding.FragmentDoingBinding
 import com.leafcabral.tasks.databinding.FragmentHomeBinding
 import com.leafcabral.tasks.ui.adapter.ViewPagerAdapter
 

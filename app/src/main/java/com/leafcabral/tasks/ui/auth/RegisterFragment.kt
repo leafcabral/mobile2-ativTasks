@@ -9,6 +9,7 @@ import android.widget.Toast
 import com.leafcabral.tasks.R
 import com.leafcabral.tasks.databinding.FragmentRegisterBinding
 import com.leafcabral.tasks.util.initToolbar
+import com.leafcabral.tasks.util.showBottomSheet
 
 class RegisterFragment : Fragment() {
 
@@ -45,11 +46,11 @@ class RegisterFragment : Fragment() {
 		val senha = binding.inputSenha.text.toString().trim()
 
 		if (email.isBlank()) {
-			Toast.makeText(requireContext(), "Preencha seu email", Toast.LENGTH_SHORT).show()
+			showBottomSheet(message = getString(R.string.register_email_empty))
 			return false
 		}
 		if (senha.isBlank()) {
-			Toast.makeText(requireContext(), "Preencha a senha", Toast.LENGTH_SHORT).show()
+			showBottomSheet(message = getString(R.string.register__password_empty))
 			return false
 		}
 

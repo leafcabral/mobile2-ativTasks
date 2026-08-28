@@ -2,6 +2,10 @@
 	<string name="app_name">Tasks</string>
 	<string name="app_creator">Rafael Cabral Lopes &amp; Luiz Felipe Silva de Freitas</string>
 
+	<string name="hello_blank_fragment">This is stupid</string>
+
+	<string name="content_description_splash_screen_image">SplashScreen Image</string>
+
 	<string name="input_email_label">E-mail</string>
 	<string name="input_email_placeholder">Digite seu e-mail</string>
 	<string name="input_senha_label">Senha</string>
@@ -15,8 +19,27 @@
 	<string name="status_task_doing">Fazendo</string>
 	<string name="status_task_done">Feitas</string>
 
-	<string name="toolbar_form_task">Nova Tarefa</string>
+	<string name="form_task_radio_todo">A fazer</string>
+	<string name="form_task_radio_doing">Fazendo</string>
+	<string name="form_task_radio_done">Feito</string>
+	<string name="form_task_description">Descrição</string>
+	<string name="form_task_description_input">Informe sua nova tarefa</string>
+	<string name="form_task_button_save">Salvar</string>
+	<string name="form_task_toolbar">Nova Tarefa</string>
 
-	<!-- TODO: Remove or change this placeholder text -->
-	<string name="hello_blank_fragment">Hello blank fragment</string>
+	<string name="bottom_sheet_ok">Entendi</string>
+	<string name="bottom_sheet_message">Mensagem</string>
+	<string name="bottom_sheet_warning">Atenção</string>
+
+	<string name="home_content_description_tabs">Tabs</string>
+	<string name="home_content_description_logout">Logout</string>
+
+	<string name="todo_content_description_add_task">Add Task</string>
+
+	<string name="email_empty">Preencha seu email</string>
+	<string name="password_empty">Preencha a senha</string>
+	<string name="register_email_empty">Preencha seu email</string>
+	<string name="register__password_empty">Preencha a senha</string>
+	<string name="recover_email_empty">Preencha seu email</string>
+	<string name="form_description_empty">Preencha uma descrição</string>
 </resources>

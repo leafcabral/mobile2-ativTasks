@@ -9,6 +9,7 @@ import android.widget.Toast
 import com.leafcabral.tasks.R
 import com.leafcabral.tasks.databinding.FragmentRecoverAccountBinding
 import com.leafcabral.tasks.util.initToolbar
+import com.leafcabral.tasks.util.showBottomSheet
 
 class RecoverAccountFragment : Fragment() {
 
@@ -44,7 +45,7 @@ class RecoverAccountFragment : Fragment() {
 		val email = binding.inputEmail.text.toString().trim()
 
 		if (email.isBlank()) {
-			Toast.makeText(requireContext(), "Preencha seu email", Toast.LENGTH_SHORT).show()
+			showBottomSheet(message = getString(R.string.recover_email_empty))
 			return false
 		}
 

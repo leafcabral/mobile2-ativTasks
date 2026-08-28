@@ -11,7 +11,7 @@
 
 	<LinearLayout
 		android:layout_width="match_parent"
-		android:layout_height="match_parent"
+		android:layout_height="wrap_content"
 		android:orientation="vertical"
 		android:clipChildren="false"
 		android:clipToPadding="false">
@@ -29,7 +29,7 @@
 			<TextView
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:text="@string/toolbar_form_task"
+				android:text="@string/form_task_toolbar"
 				android:textColor="@color/primary"
 				android:layout_gravity="center"
 				android:textStyle="bold"/>
@@ -39,16 +39,16 @@
 			android:id="@+id/label_descricao"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="Descrição"
+			android:text="@string/form_task_description"
 			android:textColor="@color/black"/>
 
 		<EditText
 			android:id="@+id/input_descricao"
 			android:layout_width="match_parent"
 			android:layout_height="48dp"
-			android:background="@drawable/bg_edit_text"
-			android:hint="Informe sua nova tarefa"
-			android:padding="10dp"/>
+			style="@style/EditTextTheme"
+			android:hint="@string/form_task_description_input"
+			android:inputType="text"/>
 
 		<RadioGroup
 			android:id="@+id/radio_group"
@@ -61,7 +61,7 @@
 				android:id="@+id/radio_todo"
 				android:layout_width="88dp"
 				android:layout_height="48dp"
-				android:text="A fazer"
+				android:text="@string/form_task_radio_todo"
 				android:textColor="@color/black"
 				android:checked="true"
 				android:theme="@style/RadioButton"/>
@@ -69,7 +69,7 @@
 				android:id="@+id/radio_doing"
 				android:layout_width="88dp"
 				android:layout_height="48dp"
-				android:text="Fazendo"
+				android:text="@string/form_task_radio_doing"
 				android:textColor="@color/black"
 				android:checked="false"
 				android:theme="@style/RadioButton"/>
@@ -77,7 +77,7 @@
 				android:id="@+id/radio_done"
 				android:layout_width="88dp"
 				android:layout_height="48dp"
-				android:text="Feito"
+				android:text="@string/form_task_radio_done"
 				android:textColor="@color/black"
 				android:checked="false"
 				android:theme="@style/RadioButton"/>
@@ -87,9 +87,8 @@
 			android:id="@+id/button_salvar"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:background="@drawable/bt_btn"
-			app:backgroundTint="@null"
-			android:text="Salvar"
+			style="@style/ButtonTheme"
+			android:text="@string/form_task_button_save"
 
 			android:layout_marginTop="16dp"/>
 
