@@ -13,13 +13,11 @@ import com.leafcabral.tasks.databinding.FragmentDoingBinding
 import com.leafcabral.tasks.ui.adapter.TaskAdapter
 
 
-private lateinit var taskAdapter: TaskAdapter
-
-
 class DoingFragment : Fragment() {
-
 	private var _binding: FragmentDoingBinding? = null
 	private val binding get() = _binding!!
+
+	private lateinit var taskAdapter: TaskAdapter
 
 	override fun onCreateView(
 		inflater: LayoutInflater, container: ViewGroup?,
@@ -33,6 +31,7 @@ class DoingFragment : Fragment() {
 		super.onViewCreated(view, savedInstanceState)
 
 		initRecyclerViewTask()
+		getTask()
 	}
 
 	override fun onDestroyView() {
@@ -41,12 +40,26 @@ class DoingFragment : Fragment() {
 	}
 
 
+	private fun getTask() {
+		val taskList = listOf(
+			Task("8", "Atualizar o Android Studio", Status.DONE),
+			Task("9", "Acompanhar o Google I/O", Status.DONE),
+			Task("10", "Keep Android Open", Status.DONE),
+			Task("11", "Consertar leitor de PDF", Status.DONE)
+		)
+
+		taskAdapter.submitList(taskList)
+	}
+
+
 	private fun initRecyclerViewTask() {
 		taskAdapter = TaskAdapter(requireContext(),) { task, option -> optionSelected(task, option)}
-		binding.recyclerViewTask.layoutManager = LinearLayoutManager(requireContext())
-		binding.recyclerViewTask.setHasFixedSize(true)
+		with(binding.recyclerViewTask) {
+			layoutManager = LinearLayoutManager(requireContext())
+			setHasFixedSize(true)
+			adapter = taskAdapter
+		}
 
-		binding.recyclerViewTask.adapter = taskAdapter
 	}
 
 	private fun optionSelected(task: Task, option: Int) {

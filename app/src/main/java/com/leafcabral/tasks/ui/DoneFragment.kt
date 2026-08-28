@@ -6,22 +6,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.leafcabral.tasks.R
 import com.leafcabral.tasks.data.model.Status
 import com.leafcabral.tasks.data.model.Task
 import com.leafcabral.tasks.databinding.FragmentDoneBinding
 import com.leafcabral.tasks.ui.adapter.TaskAdapter
 
 
-private lateinit var taskAdapter: TaskAdapter
-
 
 class DoneFragment : Fragment() {
-
 	private var _binding: FragmentDoneBinding? = null
 	private val binding get() = _binding!!
+
+	private lateinit var taskAdapter: TaskAdapter
 
 	override fun onCreateView(
 		inflater: LayoutInflater, container: ViewGroup?,
@@ -34,7 +31,8 @@ class DoneFragment : Fragment() {
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 
-		initRecyclerViewTask())
+		initRecyclerViewTask()
+		getTask()
 	}
 
 	override fun onDestroyView() {
@@ -43,12 +41,25 @@ class DoneFragment : Fragment() {
 	}
 
 
+	private fun getTask() {
+		val taskList = listOf(
+			Task("8", "Atualizar o Android Studio", Status.DONE),
+			Task("9", "Acompanhar o Google I/O", Status.DONE),
+			Task("10", "Keep Android Open", Status.DONE),
+			Task("11", "Consertar leitor de PDF", Status.DONE)
+		)
+
+		taskAdapter.submitList(taskList)
+	}
+
+
 	private fun initRecyclerViewTask() {
 		taskAdapter = TaskAdapter(requireContext()) { task, option -> optionSelected(task, option)}
-		binding.recyclerViewTask.layoutManager = LinearLayoutManager(requireContext())
-		binding.recyclerViewTask.setHasFixedSize(true)
-
-		binding.recyclerViewTask.adapter = taskAdapter
+		with(binding.recyclerViewTask) {
+			layoutManager = LinearLayoutManager(requireContext())
+			setHasFixedSize(true)
+			adapter = taskAdapter
+		}
 	}
 
 	private fun optionSelected(task: Task, option: Int) {
