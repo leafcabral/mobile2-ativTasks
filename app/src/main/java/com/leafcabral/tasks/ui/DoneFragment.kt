@@ -34,10 +34,7 @@ class DoneFragment : Fragment() {
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 
-		initRecyclerViewTask(listOf(
-			Task("0", "Validar informações na tela de cadasro", Status.DONE),
-			Task("1", "Salvar foto do usuário no banco de dados", Status.DONE),
-		))
+		initRecyclerViewTask())
 	}
 
 	override fun onDestroyView() {
@@ -46,8 +43,8 @@ class DoneFragment : Fragment() {
 	}
 
 
-	private fun initRecyclerViewTask(taskList: List<Task>) {
-		taskAdapter = TaskAdapter(requireContext(), taskList) { task, option -> optionSelected(task, option)}
+	private fun initRecyclerViewTask() {
+		taskAdapter = TaskAdapter(requireContext()) { task, option -> optionSelected(task, option)}
 		binding.recyclerViewTask.layoutManager = LinearLayoutManager(requireContext())
 		binding.recyclerViewTask.setHasFixedSize(true)
 

@@ -32,10 +32,7 @@ class DoingFragment : Fragment() {
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 
-		initRecyclerViewTask(listOf(
-			Task("0", "Ajustar tela de produtos do app", Status.DOING),
-			Task("1", "Validar informações na tela de login", Status.DOING),
-		))
+		initRecyclerViewTask()
 	}
 
 	override fun onDestroyView() {
@@ -44,8 +41,8 @@ class DoingFragment : Fragment() {
 	}
 
 
-	private fun initRecyclerViewTask(taskList: List<Task>) {
-		taskAdapter = TaskAdapter(requireContext(), taskList) { task, option -> optionSelected(task, option)}
+	private fun initRecyclerViewTask() {
+		taskAdapter = TaskAdapter(requireContext(),) { task, option -> optionSelected(task, option)}
 		binding.recyclerViewTask.layoutManager = LinearLayoutManager(requireContext())
 		binding.recyclerViewTask.setHasFixedSize(true)
 

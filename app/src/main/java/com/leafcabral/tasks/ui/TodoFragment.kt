@@ -39,13 +39,7 @@ class TodoFragment : Fragment() {
 			findNavController().navigate(R.id.action_homeFragment_to_formTaskFragment)
 		}
 
-		initRecyclerViewTask(listOf(
-			Task("0", "Criar nova tela do app", Status.TODO),
-			Task("1", "Validar informações na tela de login", Status.TODO),
-			Task("2", "Adicionar nova funcionalidade no app", Status.TODO),
-			Task("3", "Salvar token localmente", Status.TODO),
-			Task("4", "Criar funcionalidade de logout no app", Status.TODO)
-		))
+		initRecyclerViewTask()
 	}
 
 	override fun onDestroyView() {
@@ -54,8 +48,8 @@ class TodoFragment : Fragment() {
 	}
 
 
-	private fun initRecyclerViewTask(taskList: List<Task>) {
-		taskAdapter = TaskAdapter(requireContext(), taskList) { task, option -> optionSelected(task, option)}
+	private fun initRecyclerViewTask() {
+		taskAdapter = TaskAdapter(requireContext()) { task, option -> optionSelected(task, option)}
 		binding.recyclerViewTask.layoutManager = LinearLayoutManager(requireContext())
 		binding.recyclerViewTask.setHasFixedSize(true)
 
