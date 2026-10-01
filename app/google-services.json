@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "332074290208",
+    "project_id": "taskapp-8c9ed",
+    "storage_bucket": "taskapp-8c9ed.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:332074290208:android:a7828866568a3e12240045",
+        "android_client_info": {
+          "package_name": "com.leafcabral.tasks"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBpodsvND31Slg-MvZ6_YaGjQCiCTpkju4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -6,6 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
+import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.auth
 import com.leafcabral.tasks.R
 import com.leafcabral.tasks.databinding.FragmentRegisterBinding
 import com.leafcabral.tasks.util.initToolbar
@@ -16,11 +20,15 @@ class RegisterFragment : Fragment() {
 	private var _binding: FragmentRegisterBinding? = null
 	private val binding get() = _binding!!
 
+	private lateinit var auth: FirebaseAuth
+
 	override fun onCreateView(
 		inflater: LayoutInflater, container: ViewGroup?,
 		savedInstanceState: Bundle?
 	): View {
 		_binding = FragmentRegisterBinding.inflate(inflater, container, false)
+		auth = Firebase.auth
+
 		return binding.root
 	}
 
@@ -30,7 +38,10 @@ class RegisterFragment : Fragment() {
 
 		binding.buttonRegister.setOnClickListener {
 			if (areInputsValid()) {
-				Toast.makeText(requireContext(), "Compila OK", Toast.LENGTH_SHORT).show()
+				registerUser(
+					binding.inputEmail.text.toString(),
+					binding.inputSenha.text.toString(),
+				)
 			}
 		}
 	}
@@ -55,5 +66,20 @@ class RegisterFragment : Fragment() {
 		}
 
 		return true
+	}
+
+	private fun registerUser(email: String, password: String) {
+		try {
+			auth.signInWithEmailAndPassword(email, password)
+				.addOnCompleteListener { task ->
+					if (task.isSuccessful) {
+						findNavController().navigate(R.id.action_global_homeFragment)
+					} else {
+						throw Exception(task.exception?.message)
+					}
+				}
+		} catch (e: Exception) {
+			Toast.makeText(requireContext(), e.message.toString(), Toast.LENGTH_SHORT).show()
+		}
 	}
 }
