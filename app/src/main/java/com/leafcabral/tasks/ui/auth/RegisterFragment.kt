@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
@@ -70,11 +71,13 @@ class RegisterFragment : Fragment() {
 
 	private fun registerUser(email: String, password: String) {
 		try {
-			auth.signInWithEmailAndPassword(email, password)
+			auth.createUserWithEmailAndPassword(email, password)
 				.addOnCompleteListener { task ->
 					if (task.isSuccessful) {
+						binding.progressBar.isVisible = true
 						findNavController().navigate(R.id.action_global_homeFragment)
 					} else {
+						binding.progressBar.isVisible = false
 						throw Exception(task.exception?.message)
 					}
 				}
