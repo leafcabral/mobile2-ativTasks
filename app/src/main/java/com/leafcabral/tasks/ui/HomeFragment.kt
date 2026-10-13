@@ -7,6 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayoutMediator
+import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.auth
 import com.leafcabral.tasks.R
 import com.leafcabral.tasks.databinding.FragmentHomeBinding
 import com.leafcabral.tasks.ui.adapter.ViewPagerAdapter
@@ -16,6 +19,8 @@ class HomeFragment : Fragment() {
 
 	private var _binding: FragmentHomeBinding? = null
 	private val binding get() = _binding!!
+
+	private lateinit var auth: FirebaseAuth
 
 	override fun onCreateView(
 		inflater: LayoutInflater, container: ViewGroup?,
@@ -27,6 +32,8 @@ class HomeFragment : Fragment() {
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
+
+		auth = Firebase.auth
 
 		initTabs()
 		binding.buttonLogout.setOnClickListener {
