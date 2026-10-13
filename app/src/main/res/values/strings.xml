@@ -46,4 +46,6 @@
 	<string name="item_task_remove">Remover</string>
 	<string name="item_task_edit">Editar</string>
 	<string name="item_task_details">Detalhes</string>
+	<string name="text_save_success_form_task_fragment">Tarefa salva com sucesso</string>
+	<string name="error_generic">Ocorreu um erro, tente novamente mais tarde</string>
 </resources>

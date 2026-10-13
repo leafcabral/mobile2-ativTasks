@@ -39,20 +39,7 @@ class LoginFragment : Fragment() {
 			if (areInputsValid()) {
 				val email = binding.inputEmail.text.toString()
 				val password = binding.inputSenha.text.toString()
-				try {
-					auth.signInWithEmailAndPassword(email, password)
-						.addOnCompleteListener { task ->
-							if (task.isSuccessful) {
-								binding.progressBar.isVisible = true
-								findNavController().navigate(R.id.action_global_homeFragment)
-							} else {
-								binding.progressBar.isVisible = false
-								findNavController().navigate(R.id.action_splashFragment_to_authentication)
-							}
-						}
-				} catch (e: Exception) {
-					Toast.makeText(requireContext(), e.message.toString(), Toast.LENGTH_SHORT).show()
-				}
+				loginUser(email, password)
 			}
 		}
 		binding.buttonRegister.setOnClickListener {
@@ -60,6 +47,23 @@ class LoginFragment : Fragment() {
 		}
 		binding.buttonRecover.setOnClickListener {
 			findNavController().navigate(R.id.action_loginFragment_to_recoverAccountFragment)
+		}
+	}
+
+	private fun loginUser(email: String, password: String) {
+		try {
+			auth.signInWithEmailAndPassword(email, password)
+				.addOnCompleteListener { task ->
+					if (task.isSuccessful) {
+						binding.progressBar.isVisible = true
+						findNavController().navigate(R.id.action_global_homeFragment)
+					} else {
+						binding.progressBar.isVisible = false
+						findNavController().navigate(R.id.action_splashFragment_to_authentication)
+					}
+				}
+		} catch (e: Exception) {
+			Toast.makeText(requireContext(), e.message.toString(), Toast.LENGTH_SHORT).show()
 		}
 	}
 
