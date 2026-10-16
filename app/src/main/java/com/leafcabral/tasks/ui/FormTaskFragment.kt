@@ -20,6 +20,8 @@ import com.leafcabral.tasks.databinding.FragmentFormTaskBinding
 import com.leafcabral.tasks.util.initToolbar
 import com.leafcabral.tasks.util.showBottomSheet
 
+const val DB_NAME_USERS = "users"
+const val DB_NAME_TASKS = "tasks"
 
 class FormTaskFragment : Fragment() {
 
@@ -27,11 +29,10 @@ class FormTaskFragment : Fragment() {
 	private val binding get() = _binding!!
 
 	private lateinit var auth: FirebaseAuth
-	private lateinit var reference: DatabaseReference
+	private lateinit var database: DatabaseReference
 
-	private lateinit var task: Task
-	private var newTask = true
 	private var status = Status.TODO
+	// private var newTask = true
 
 	override fun onCreateView(
 		inflater: LayoutInflater, container: ViewGroup?,
@@ -46,11 +47,11 @@ class FormTaskFragment : Fragment() {
 		initToolbar(binding.toolbar)
 
 		auth = Firebase.auth
-		reference = Firebase.database.reference
+		database = Firebase.database.reference
 
 		binding.apply {
 			buttonSalvar.setOnClickListener {
-				validateData()
+				validateAndCreateTask()
 			}
 			
 			radioGroup.setOnCheckedChangeListener { _, id ->
@@ -58,13 +59,13 @@ class FormTaskFragment : Fragment() {
 					R.id.radio_todo -> {Status.TODO}
 					R.id.radio_doing -> {Status.DOING}
 					R.id.radio_done -> {Status.DONE}
-					else -> throw Error("bomboclat")
+					else -> throw Error("bomboclat wallahi")
 				}
 			}
 		}
 	}
 
-	private fun validateData() {
+	private fun validateAndCreateTask() {
 		val description = binding.inputDescricao.text.toString().trim()
 
 		if (description.isBlank()) {
@@ -72,28 +73,32 @@ class FormTaskFragment : Fragment() {
 			return
 		}
 
-		if (newTask) {
-			task = Task(reference.push().key.toString(), description, status)
-			saveTask()
-		}
+		// if (newTask), se for usar
+		saveTask(Task(createRandomKey(), description, status))
 	}
 
-	private fun saveTask() {
-		reference
-			.child("task")
-			.child(auth.currentUser?.uid ?: "")
+	private fun createRandomKey() = database.push().key.toString()
+
+	private fun saveTask(task: Task) {
+		binding.progressBar.isVisible = true
+
+		databaseGetUser(auth.currentUser?.uid ?: "")
+			.child(DB_NAME_TASKS)
 			.child(task.id)
-			.setValue(task)
+			.setValue(task.toMap())
 			.addOnCompleteListener { result ->
 				if (result.isSuccessful) {
 					Toast.makeText(requireContext(), R.string.text_save_success_form_task_fragment, Toast.LENGTH_SHORT).show()
 					findNavController().popBackStack()
 				} else {
-					binding.progressBar.isVisible = true
 					showBottomSheet(message = getString(R.string.error_generic))
 				}
+
+				binding.progressBar.isVisible = false
 			}
 	}
+
+	private fun databaseGetUser(id: String) = database.child(DB_NAME_USERS).child(id)
 
 	override fun onDestroyView() {
 		super.onDestroyView()

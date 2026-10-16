@@ -8,4 +8,9 @@ data class Task (
 	val id: String,
 	val description: String,
 	val status: Status = Status.TODO
-): Parcelable
+): Parcelable {
+	fun toMap() = mapOf(
+		"description" to description,
+		"status" to status.toString().lowercase()
+	)
+}
