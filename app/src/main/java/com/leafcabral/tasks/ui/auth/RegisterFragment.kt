@@ -38,12 +38,42 @@ class RegisterFragment : Fragment() {
 		initToolbar(binding.toolbar)
 
 		binding.buttonRegister.setOnClickListener {
-			if (areInputsValid()) {
-				registerUser(
-					binding.inputEmail.text.toString(),
-					binding.inputSenha.text.toString(),
-				)
-			}
+			validateAndRegister()
+		}
+	}
+
+	private fun validateAndRegister() {
+		val email = binding.inputEmail.text.toString().trim()
+		val password = binding.inputSenha.text.toString().trim()
+
+		if (email.isBlank()) {
+			showBottomSheet(message = getString(R.string.register_email_empty))
+			return
+		}
+		if (password.isBlank()) {
+			showBottomSheet(message = getString(R.string.register__password_empty))
+			return
+		}
+
+		registerUser(email, password)
+	}
+
+	private fun registerUser(email: String, password: String) {
+		binding.progressBar.isVisible = true
+
+		try {
+			auth.createUserWithEmailAndPassword(email, password)
+				.addOnCompleteListener { task ->
+					if (!task.isSuccessful) {
+						throw Exception(task.exception?.message)
+					}
+
+					findNavController().navigate(R.id.action_global_homeFragment)
+				}
+		} catch (e: Exception) {
+			Toast.makeText(requireContext(), e.message.toString(), Toast.LENGTH_SHORT).show()
+		} finally {
+			binding.progressBar.isVisible = false
 		}
 	}
 
@@ -52,37 +82,4 @@ class RegisterFragment : Fragment() {
 		_binding = null
 	}
 
-
-	private fun areInputsValid(): Boolean {
-		val email = binding.inputEmail.text.toString().trim()
-		val senha = binding.inputSenha.text.toString().trim()
-
-		if (email.isBlank()) {
-			showBottomSheet(message = getString(R.string.register_email_empty))
-			return false
-		}
-		if (senha.isBlank()) {
-			showBottomSheet(message = getString(R.string.register__password_empty))
-			return false
-		}
-
-		return true
-	}
-
-	private fun registerUser(email: String, password: String) {
-		try {
-			auth.createUserWithEmailAndPassword(email, password)
-				.addOnCompleteListener { task ->
-					if (task.isSuccessful) {
-						binding.progressBar.isVisible = true
-						findNavController().navigate(R.id.action_global_homeFragment)
-					} else {
-						binding.progressBar.isVisible = false
-						throw Exception(task.exception?.message)
-					}
-				}
-		} catch (e: Exception) {
-			Toast.makeText(requireContext(), e.message.toString(), Toast.LENGTH_SHORT).show()
-		}
-	}
 }

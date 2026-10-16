@@ -51,17 +51,13 @@ class SplashFragment : Fragment() {
 
 	private fun checkAuth() {
 		try {
-			val currentUser = auth.currentUser
-			if (currentUser == null) {
-				findNavController().navigate(R.id.action_splashFragment_to_authentication)
-			} else {
+			if (auth.currentUser != null) {
 				findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
 			}
 		} catch (e: Exception) {
 			Toast.makeText(requireContext(), e.message.toString(), Toast.LENGTH_SHORT).show()
+		} finally {
 			findNavController().navigate(R.id.action_splashFragment_to_authentication)
 		}
-
-		findNavController().navigate(R.id.action_splashFragment_to_authentication)
 	}
 }

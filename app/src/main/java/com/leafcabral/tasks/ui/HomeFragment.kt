@@ -37,6 +37,7 @@ class HomeFragment : Fragment() {
 
 		initTabs()
 		binding.buttonLogout.setOnClickListener {
+			auth.signOut()
 			findNavController().navigate(R.id.action_homeFragment_to_authentication)
 		}
 	}

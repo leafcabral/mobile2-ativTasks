@@ -62,8 +62,20 @@ class FormTaskFragment : Fragment() {
 				}
 			}
 		}
-		
-		
+	}
+
+	private fun validateData() {
+		val description = binding.inputDescricao.text.toString().trim()
+
+		if (description.isBlank()) {
+			showBottomSheet(message = getString(R.string.form_description_empty))
+			return
+		}
+
+		if (newTask) {
+			task = Task(reference.push().key.toString(), description, status)
+			saveTask()
+		}
 	}
 
 	private fun saveTask() {
@@ -86,20 +98,5 @@ class FormTaskFragment : Fragment() {
 	override fun onDestroyView() {
 		super.onDestroyView()
 		_binding = null
-	}
-
-
-	private fun validateData() {
-		val description = binding.inputDescricao.text.toString().trim()
-
-		if (description.isBlank()) {
-			showBottomSheet(message = getString(R.string.form_description_empty))
-			return
-		}
-
-		if (newTask) {
-			task = Task(reference.push().key.toString(), description, status)
-			saveTask()
-		}
 	}
 }

@@ -36,11 +36,7 @@ class LoginFragment : Fragment() {
 		super.onViewCreated(view, savedInstanceState)
 
 		binding.buttonLogin.setOnClickListener {
-			if (areInputsValid()) {
-				val email = binding.inputEmail.text.toString()
-				val password = binding.inputSenha.text.toString()
-				loginUser(email, password)
-			}
+			validateAndLogin()
 		}
 		binding.buttonRegister.setOnClickListener {
 			findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
@@ -50,20 +46,42 @@ class LoginFragment : Fragment() {
 		}
 	}
 
+	private fun validateAndLogin() {
+		val email = binding.inputEmail.text.toString()
+		val password = binding.inputSenha.text.toString()
+
+		if (email.isBlank()) {
+			showBottomSheet(message = getString(R.string.email_empty))
+			return
+		}
+		if (password.isBlank()) {
+			showBottomSheet(message = getString(R.string.password_empty))
+			return
+		}
+
+		loginUser(email, password)
+	}
+
 	private fun loginUser(email: String, password: String) {
-		try {
-			auth.signInWithEmailAndPassword(email, password)
-				.addOnCompleteListener { task ->
-					if (task.isSuccessful) {
-						binding.progressBar.isVisible = true
-						findNavController().navigate(R.id.action_global_homeFragment)
-					} else {
-						binding.progressBar.isVisible = false
-						findNavController().navigate(R.id.action_splashFragment_to_authentication)
-					}
+		binding.progressBar.isVisible = true
+
+		auth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
+			try {
+				val exception = task.exception
+				if (!task.isSuccessful && exception != null) {
+					throw Exception(exception.message)
 				}
-		} catch (e: Exception) {
-			Toast.makeText(requireContext(), e.message.toString(), Toast.LENGTH_SHORT).show()
+
+				findNavController().navigate(R.id.action_global_homeFragment)
+			} catch (e: Exception) {
+				Toast.makeText(
+					requireContext(),
+					e.message.toString(),
+					Toast.LENGTH_SHORT,
+				).show()
+			} finally {
+				binding.progressBar.isVisible = false
+			}
 		}
 	}
 
@@ -73,19 +91,4 @@ class LoginFragment : Fragment() {
 	}
 
 
-	private fun areInputsValid(): Boolean {
-		val email = binding.inputEmail.text.toString().trim()
-		val senha = binding.inputSenha.text.toString().trim()
-
-		if (email.isBlank()) {
-			showBottomSheet(message = getString(R.string.email_empty))
-			return false
-		}
-		if (senha.isBlank()) {
-			showBottomSheet(message = getString(R.string.password_empty))
-			return false
-		}
-
-		return true
-	}
 }
