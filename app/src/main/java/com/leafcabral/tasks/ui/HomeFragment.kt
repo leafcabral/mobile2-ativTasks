@@ -40,6 +40,10 @@ class HomeFragment : Fragment() {
 			auth.signOut()
 			findNavController().navigate(R.id.action_homeFragment_to_authentication)
 		}
+
+		binding.floatingActionButton.setOnClickListener {
+			findNavController().navigate(R.id.action_homeFragment_to_formTaskFragment)
+		}
 	}
 
 	override fun onDestroyView() {

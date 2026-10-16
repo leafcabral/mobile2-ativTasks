@@ -53,11 +53,12 @@ class SplashFragment : Fragment() {
 		try {
 			if (auth.currentUser != null) {
 				findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
+				return
 			}
 		} catch (e: Exception) {
 			Toast.makeText(requireContext(), e.message.toString(), Toast.LENGTH_SHORT).show()
-		} finally {
-			findNavController().navigate(R.id.action_splashFragment_to_authentication)
 		}
+
+		findNavController().navigate(R.id.action_splashFragment_to_authentication)
 	}
 }
