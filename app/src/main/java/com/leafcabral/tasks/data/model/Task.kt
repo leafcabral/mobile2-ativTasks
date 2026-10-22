@@ -9,8 +9,11 @@ data class Task (
 	val description: String,
 	val status: Status = Status.TODO
 ): Parcelable {
+	// Necessário pro firebase funcionar
+	constructor() : this("", "", Status.TODO)
+
 	fun toMap() = mapOf(
 		"description" to description,
-		"status" to status.toString().lowercase()
+		"status" to status.toString().uppercase()
 	)
 }

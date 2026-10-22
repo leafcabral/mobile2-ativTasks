@@ -7,17 +7,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.auth
 import com.leafcabral.tasks.data.model.Status
 import com.leafcabral.tasks.data.model.Task
 import com.leafcabral.tasks.databinding.FragmentDoneBinding
 import com.leafcabral.tasks.ui.adapter.TaskAdapter
-
+import com.leafcabral.tasks.util.DatabaseManager
 
 
 class DoneFragment : Fragment() {
 	private var _binding: FragmentDoneBinding? = null
 	private val binding get() = _binding!!
 
+	private lateinit var auth: FirebaseAuth
 	private lateinit var taskAdapter: TaskAdapter
 
 	override fun onCreateView(
@@ -30,6 +34,7 @@ class DoneFragment : Fragment() {
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
+		auth = Firebase.auth
 
 		initRecyclerViewTask()
 		getTask()
@@ -42,14 +47,17 @@ class DoneFragment : Fragment() {
 
 
 	private fun getTask() {
-		val taskList = listOf(
-			Task("8", "Atualizar o Android Studio", Status.DONE),
-			Task("9", "Acompanhar o Google I/O", Status.DONE),
-			Task("10", "Keep Android Open", Status.DONE),
-			Task("11", "Consertar leitor de PDF", Status.DONE)
-		)
+		DatabaseManager
+			.getTasksSnapshots(auth.currentUser?.uid ?: "")
+			.addOnSuccessListener { snapshot ->
+				if (!snapshot.exists()) return@addOnSuccessListener
 
-		taskAdapter.submitList(taskList)
+				val tasks = DatabaseManager.snapshotToTasks(snapshot).filter {
+						task -> task.status == Status.DONE
+				}
+
+				taskAdapter.submitList(tasks)
+			}
 	}
 
 
@@ -63,22 +71,14 @@ class DoneFragment : Fragment() {
 	}
 
 	private fun optionSelected(task: Task, option: Int) {
-		when (option) {
-			TaskAdapter.SELECT_REMOVER -> {
-				Toast.makeText(requireContext(), "Removendo ${task.description}", Toast.LENGTH_SHORT).show()
-			}
-
-			TaskAdapter.SELECT_EDIT -> {
-				Toast.makeText(requireContext(), "Editando ${task.description}", Toast.LENGTH_SHORT).show()
-			}
-
-			TaskAdapter.SELECT_DETAILS -> {
-				Toast.makeText(requireContext(), "Detalhes ${task.description}", Toast.LENGTH_SHORT).show()
-			}
-
-			TaskAdapter.SELECT_NEXT -> {
-				Toast.makeText(requireContext(), "Próximo", Toast.LENGTH_SHORT).show()
-			}
+		val message = when (option) {
+			TaskAdapter.SELECT_REMOVER -> "Removendo ${task.description}"
+			TaskAdapter.SELECT_EDIT -> "Editando ${task.description}"
+			TaskAdapter.SELECT_DETAILS -> "Detalhes ${task.description}"
+			TaskAdapter.SELECT_NEXT -> "Próximo"
+			TaskAdapter.SELECT_BACK -> "Anterior"
+			else -> ""
 		}
+		Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
 	}
 }

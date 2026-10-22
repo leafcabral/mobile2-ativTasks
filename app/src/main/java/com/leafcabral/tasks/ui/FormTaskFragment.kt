@@ -17,11 +17,9 @@ import com.leafcabral.tasks.R
 import com.leafcabral.tasks.data.model.Status
 import com.leafcabral.tasks.data.model.Task
 import com.leafcabral.tasks.databinding.FragmentFormTaskBinding
+import com.leafcabral.tasks.util.DatabaseManager
 import com.leafcabral.tasks.util.initToolbar
 import com.leafcabral.tasks.util.showBottomSheet
-
-const val DB_NAME_USERS = "users"
-const val DB_NAME_TASKS = "tasks"
 
 class FormTaskFragment : Fragment() {
 
@@ -82,23 +80,19 @@ class FormTaskFragment : Fragment() {
 	private fun saveTask(task: Task) {
 		binding.progressBar.isVisible = true
 
-		databaseGetUser(auth.currentUser?.uid ?: "")
-			.child(DB_NAME_TASKS)
-			.child(task.id)
-			.setValue(task.toMap())
+		DatabaseManager
+			.createTask(auth.currentUser?.uid ?: "", task)
 			.addOnCompleteListener { result ->
-				if (result.isSuccessful) {
-					Toast.makeText(requireContext(), R.string.text_save_success_form_task_fragment, Toast.LENGTH_SHORT).show()
-					findNavController().popBackStack()
-				} else {
+				if (!result.isSuccessful) {
 					showBottomSheet(message = getString(R.string.error_generic))
 				}
+
+				Toast.makeText(requireContext(), R.string.text_save_success_form_task_fragment, Toast.LENGTH_SHORT).show()
+				findNavController().popBackStack()
 
 				binding.progressBar.isVisible = false
 			}
 	}
-
-	private fun databaseGetUser(id: String) = database.child(DB_NAME_USERS).child(id)
 
 	override fun onDestroyView() {
 		super.onDestroyView()
