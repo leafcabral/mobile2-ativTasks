@@ -19,11 +19,11 @@ class TaskAdapter(
 	private val taskSelected: (Task, Int) -> Unit
 ): ListAdapter<Task, TaskAdapter.MyViewHolder>(DIFF_CALLBACK) {
 	companion object {
-		val SELECT_BACK: Int = 1
-		val SELECT_REMOVER: Int = 2
-		val SELECT_EDIT: Int = 3
-		val SELECT_DETAILS: Int = 4
-		val SELECT_NEXT: Int = 5
+		const val SELECT_BACK: Int = 1
+		const val SELECT_REMOVER: Int = 2
+		const val SELECT_EDIT: Int = 3
+		const val SELECT_DETAILS: Int = 4
+		const val SELECT_NEXT: Int = 5
 
 		private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Task>() {
 			override fun areItemsTheSame(
@@ -89,7 +89,5 @@ class TaskAdapter(
 	}
 
 
-	inner class MyViewHolder(val binding: ItemTaskBinding): RecyclerView.ViewHolder(binding.root) {
-		;
-	}
+	class MyViewHolder(val binding: ItemTaskBinding): RecyclerView.ViewHolder(binding.root)
 }

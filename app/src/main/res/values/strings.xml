@@ -2,8 +2,6 @@
 	<string name="app_name">Tasks</string>
 	<string name="app_creator">Rafael Cabral Lopes &amp; Luiz Felipe Silva de Freitas</string>
 
-	<string name="hello_blank_fragment">This is stupid</string>
-
 	<string name="content_description_splash_screen_image">SplashScreen Image</string>
 
 	<string name="input_email_label">E-mail</string>
@@ -48,4 +46,7 @@
 	<string name="item_task_details">Detalhes</string>
 	<string name="text_save_success_form_task_fragment">Tarefa salva com sucesso</string>
 	<string name="error_generic">Ocorreu um erro, tente novamente mais tarde</string>
+
+	<string name="item_task_arrow_back">Anterior</string>
+	<string name="item_task_arrow_go">Próximo</string>
 </resources>

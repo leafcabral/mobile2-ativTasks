@@ -36,7 +36,8 @@
 			android:hint="@string/input_email_placeholder"
 			android:inputType="textEmailAddress"
 			style="@style/EditTextTheme"
-			android:layout_marginTop="4dp"/>
+			android:layout_marginTop="4dp"
+			android:autofillHints="emailAddress"/>
 
 		<TextView
 			android:layout_width="wrap_content"
@@ -53,7 +54,8 @@
 			android:hint="@string/input_senha_placeholder"
 			android:inputType="textPassword"
 			style="@style/EditTextTheme"
-			android:layout_marginTop="4dp"/>
+			android:layout_marginTop="4dp"
+			android:autofillHints="password"/>
 
 		<com.google.android.material.button.MaterialButton
 			android:id="@+id/button_login"

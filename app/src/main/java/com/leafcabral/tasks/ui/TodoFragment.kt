@@ -6,9 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.leafcabral.tasks.R
 import com.leafcabral.tasks.data.model.Status
 import com.leafcabral.tasks.data.model.Task
 import com.leafcabral.tasks.databinding.FragmentTodoBinding

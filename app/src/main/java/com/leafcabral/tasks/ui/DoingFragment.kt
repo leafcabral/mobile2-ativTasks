@@ -53,7 +53,7 @@ class DoingFragment : Fragment() {
 
 
 	private fun initRecyclerViewTask() {
-		taskAdapter = TaskAdapter(requireContext(),) { task, option -> optionSelected(task, option)}
+		taskAdapter = TaskAdapter(requireContext()) { task, option -> optionSelected(task, option)}
 		with(binding.recyclerViewTask) {
 			layoutManager = LinearLayoutManager(requireContext())
 			setHasFixedSize(true)
