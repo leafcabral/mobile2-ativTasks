@@ -26,19 +26,11 @@ class TaskAdapter(
 		const val SELECT_NEXT: Int = 5
 
 		private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Task>() {
-			override fun areItemsTheSame(
-				oldItem: Task,
-				newItem: Task
-			): Boolean {
-				return oldItem.id == newItem.id && oldItem.description == newItem.description
-			}
+			override fun areItemsTheSame(oldItem: Task, newItem: Task) =
+				oldItem.id == newItem.id && oldItem.description == newItem.description
 
-			override fun areContentsTheSame(
-				oldItem: Task,
-				newItem: Task
-			): Boolean {
-				return oldItem == newItem && oldItem.description == newItem.description
-			}
+			override fun areContentsTheSame(oldItem: Task, newItem: Task) =
+				oldItem == newItem && oldItem.description == newItem.description
 		}
 	}
 

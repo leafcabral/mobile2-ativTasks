@@ -61,19 +61,23 @@ class RegisterFragment : Fragment() {
 	private fun registerUser(email: String, password: String) {
 		binding.progressBar.isVisible = true
 
-		try {
-			auth.createUserWithEmailAndPassword(email, password)
-				.addOnCompleteListener { task ->
-					if (!task.isSuccessful) {
-						throw Exception(task.exception?.message)
-					}
-
-					findNavController().navigate(R.id.action_global_homeFragment)
+		auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
+			try {
+				val exception = task.exception
+				if (!task.isSuccessful && exception != null) {
+					throw Exception(exception.message)
 				}
-		} catch (e: Exception) {
-			Toast.makeText(requireContext(), e.message.toString(), Toast.LENGTH_SHORT).show()
-		} finally {
-			binding.progressBar.isVisible = false
+
+				findNavController().navigate(R.id.action_global_homeFragment)
+			} catch (e: Exception) {
+				Toast.makeText(
+					requireContext(),
+					e.message.toString(),
+					Toast.LENGTH_SHORT
+				).show()
+			} finally {
+				binding.progressBar.isVisible = false
+			}
 		}
 	}
 
