@@ -1,6 +1,7 @@
 package com.leafcabral.tasks.ui
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -85,10 +86,13 @@ class FormTaskFragment : Fragment() {
 			.addOnCompleteListener { result ->
 				if (!result.isSuccessful) {
 					showBottomSheet(message = getString(R.string.error_generic))
+					Log.e("das", result.exception?.message.toString())
+					return@addOnCompleteListener
 				}
 
 				Toast.makeText(requireContext(), R.string.text_save_success_form_task_fragment, Toast.LENGTH_SHORT).show()
 				findNavController().popBackStack()
+
 
 				binding.progressBar.isVisible = false
 			}

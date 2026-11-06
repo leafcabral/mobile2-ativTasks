@@ -37,6 +37,11 @@ class DoneFragment : Fragment() {
 		auth = Firebase.auth
 
 		initRecyclerViewTask()
+	}
+
+	override fun onResume() {
+		super.onResume()
+
 		getTask()
 	}
 

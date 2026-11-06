@@ -37,6 +37,11 @@ class TodoFragment : Fragment() {
 		auth = Firebase.auth
 
 		initRecyclerViewTask()
+	}
+
+	override fun onResume() {
+		super.onResume()
+
 		getTask()
 	}
 
@@ -44,7 +49,6 @@ class TodoFragment : Fragment() {
 		super.onDestroyView()
 		_binding = null
 	}
-
 
 	private fun getTask() {
 		DatabaseManager
